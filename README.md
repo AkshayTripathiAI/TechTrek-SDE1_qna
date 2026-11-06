@@ -1,45 +1,62 @@
-# SDE1 Interview Questions Repository
+# TechTrek-SDE1_qna
 
-Welcome to the SDE1 Interview Questions Repository! This repository contains a curated collection of interview questions and resources to help you prepare for software development engineer (SDE) level 1 interviews. Whether you're preparing for technical rounds or behavioral interviews, you'll find valuable information and guidance here.
-
-## Table of Contents
-
-- [Algorithms and Data Structures](./Algorithms_and_Data_Structures/README.md)
-- [System Design](./System_Design/README.md)
-- [Programming Languages](./Programming_Languages/README.md)
-- [Problem Solving](./Problem_Solving/README.md)
-- [Behavioral Interview Questions](./Behavioral_Interview_Questions/README.md)
+Interview-prep notes for SDE-1 (entry-level software engineer) roles: short topic guides with common interview questions, plus two practice tests with worked answers. Everything is Markdown, so it reads directly on GitHub.
 
 ## Contents
 
 ### Algorithms and Data Structures
 
-This section covers essential algorithms and data structures topics commonly asked in technical interviews, including arrays, linked lists, sorting, searching, and more.
+- [Arrays](Algorithms_and_Data_Structures/Arrays.md)
+- [Linked Lists](Algorithms_and_Data_Structures/LinkedList.md)
+- [Sorting and Searching](Algorithms_and_Data_Structures/Sorting_and_Searching.md)
 
 ### System Design
 
-Explore concepts related to system design, scalability, database design, load balancing, and other considerations for designing scalable and reliable systems.
+- [Scalability](System_Design/Scalability.md)
+- [Load Balancing](System_Design/Load_Balancing.md)
+- [Database Design](System_Design/Database_Design.md)
 
 ### Programming Languages
 
-Brush up on your knowledge of programming languages such as Java, Python, C++, and more, with specific questions and topics relevant to software development roles.
+- [Python](Programming_Languages/Python.md)
+- [Java](Programming_Languages/Java.md)
+- [C++](Programming_Languages/C++.md)
 
 ### Problem Solving
 
-Enhance your problem-solving skills with topics like recursion, dynamic programming, string manipulation, and other algorithmic techniques commonly tested in interviews.
+- [Recursion](Problem_Solving/Recursion.md)
+- [Dynamic Programming](Problem_Solving/Dynamic_Programming.md)
+- [String Manipulation](Problem_Solving/String_Manipulation.md)
 
 ### Behavioral Interview Questions
 
-Prepare for behavioral interviews by learning about teamwork, problem-solving, communication, and presentation skills essential for success in software development roles.
+- [Teamwork and Collaboration](Behavioral_Interview_Questions/Teamwork_and_Collaboration.md)
+- [Communication and Presentation](Behavioral_Interview_Questions/Communication_and_Presentation.md)
+- [Problem Solving and Decision Making](Behavioral_Interview_Questions/Problem_Solving_and_Decision_Making.md)
 
-## Contribution
+### Practice tests
 
-Contributions are welcome! If you have additional interview questions, resources, or insights to share, feel free to contribute to this repository by submitting pull requests or opening issues.
+- [Aptitude and situational test](SDE1_test_question/test1.md): quantitative aptitude questions (work and time, speed and distance, profit percentage) and situational/workplace questions, with answers
+- [Subjective test](SDE1_subjective_test/test1.md): front-end questions on JavaScript, React and CSS (state updates, output prediction, event handling, data passing, browser storage) with answers
+
+## Project structure
+
+```
+TechTrek-SDE1_qna/
+├── Algorithms_and_Data_Structures/
+├── System_Design/
+├── Programming_Languages/
+├── Problem_Solving/
+├── Behavioral_Interview_Questions/
+├── SDE1_test_question/       # aptitude + situational practice test
+├── SDE1_subjective_test/     # JavaScript / React practice test
+└── LICENSE
+```
+
+## Contributing
+
+Corrections and additional questions are welcome via issues or pull requests.
 
 ## License
 
-This repository is licensed under the [MIT License](./LICENSE).
-
----
-
-Feel free to customize and expand upon this `README.md` file as needed to provide more context or information specific to your repository. Good luck with your interview preparation!
+[MIT](LICENSE)
