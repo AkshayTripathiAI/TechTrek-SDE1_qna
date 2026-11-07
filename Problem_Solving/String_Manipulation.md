@@ -54,7 +54,7 @@ Find the length of the longest substring without repeating characters in a given
 
 - [GeeksforGeeks - String Manipulation](https://www.geeksforgeeks.org/string-data-structure/)
 - [LeetCode - String Problems](https://leetcode.com/tag/string/)
-- [Hackerrank - String Manipulation Challenges](https://www.hackerrank.com/domains/tutorials/10-days-of-javascript)
+- [HackerRank - String Manipulation Challenges](https://www.hackerrank.com/domains/algorithms?filters%5Bsubdomains%5D%5B%5D=strings)
 
 ## Conclusion
 

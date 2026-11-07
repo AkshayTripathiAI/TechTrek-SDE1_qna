@@ -56,7 +56,7 @@ How do you handle exceptions in Python?
 
 - [Python Documentation](https://docs.python.org/3/)
 - [Real Python](https://realpython.com/)
-- [LeetCode - Python Interview Questions](https://leetcode.com/tag/python/)
+- [LeetCode - Problem Set (solve in Python)](https://leetcode.com/problemset/)
 
 ## Conclusion
 

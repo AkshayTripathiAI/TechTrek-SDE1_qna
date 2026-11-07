@@ -64,7 +64,7 @@ Continuously monitor the implementation and outcomes of the decision, and be pre
 ## Additional Resources
 
 - [Coursera - Problem Solving](https://www.coursera.org/courses?query=problem%20solving): Online courses on problem-solving techniques and strategies.
-- [MindTools - Decision Making](https://www.mindtools.com/pages/main/newMN_TED.htm): Articles and resources on decision-making skills and techniques.
+- [MindTools - Decision Making](https://www.mindtools.com/): Articles and resources on decision-making skills and techniques.
 
 ## Conclusion
 

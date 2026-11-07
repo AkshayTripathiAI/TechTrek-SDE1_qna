@@ -56,7 +56,7 @@ What are checked exceptions and unchecked exceptions in Java?
 
 - [Oracle Java Documentation](https://docs.oracle.com/javase/)
 - [GeeksforGeeks - Java Programming](https://www.geeksforgeeks.org/java/)
-- [LeetCode - Java Interview Questions](https://leetcode.com/tag/java/)
+- [LeetCode - Problem Set (solve in Java)](https://leetcode.com/problemset/)
 
 ## Conclusion
 

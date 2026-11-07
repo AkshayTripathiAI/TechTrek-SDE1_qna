@@ -82,7 +82,8 @@ Output: `[1, 2, 3, 4, 5, 6]`
 
 - [GeeksforGeeks - Sorting Algorithms](https://www.geeksforgeeks.org/sorting-algorithms/)
 - [GeeksforGeeks - Searching Algorithms](https://www.geeksforgeeks.org/searching-algorithms/)
-- [LeetCode - Sorting and Searching Problems](https://leetcode.com/tag/sorting-and-searching/)
+- [LeetCode - Sorting Problems](https://leetcode.com/tag/sorting/)
+- [LeetCode - Binary Search Problems](https://leetcode.com/tag/binary-search/)
 
 ## Conclusion
 

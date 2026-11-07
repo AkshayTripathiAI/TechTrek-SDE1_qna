@@ -70,7 +70,7 @@ Load balancing is the process of distributing incoming network traffic across mu
 
 ## Additional Resources
 
-- [NGINX - Understanding Load Balancing](https://www.nginx.com/resources/glossary/load-balancing/)
+- [F5 / NGINX - What Is a Load Balancer?](https://www.f5.com/glossary/load-balancer)
 - [Amazon EC2 Auto Scaling](https://aws.amazon.com/ec2/autoscaling/)
 - [Google Cloud Load Balancing](https://cloud.google.com/load-balancing/)
 

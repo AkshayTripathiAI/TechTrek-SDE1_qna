@@ -1,10 +1,16 @@
+# SDE-1 Subjective Test (JavaScript, React, CSS)
+
 ## Question 1
-const[user, setUser] = useState();
-user.name = 'Name'
-In above code what are your observations ? Is it right practice ?  if not give the reason why?
+
+```javascript
+const [user, setUser] = useState();
+user.name = 'Name';
+```
+
+What are your observations about the code above? Is it the right practice? If not, explain why.
 
 ### Answer: 
-The observation is that the code attempts to modify the `name` property of the `user` object directly after initializing it with `useState()`. 
+The code attempts to modify the `name` property of the `user` state directly. Because `useState()` was called without an initial value, `user` is `undefined`, so this line actually throws `TypeError: Cannot set properties of undefined`. Initialize it instead, e.g. `useState({})`.
 
 However, directly modifying state like this (`user.name = 'Name'`) is not the recommended practice in React.
 
@@ -18,14 +24,15 @@ This ensures that React can properly detect and reconcile state changes, leading
 
 
 ## Question 2
-Output for the code
+What is the output of the following code? Also, give a reason.
 
-let company = { name: 'Akshay' }; 
-const organization = [company]; '
+```javascript
+let company = { name: 'Akshay' };
+const organization = [company];
 company = null;
 
-console.log(organization); 
-Also, give a reason.
+console.log(organization);
+```
 
 ### Answer:
 The output for the code will be:
@@ -34,20 +41,18 @@ The output for the code will be:
 [{ name: 'Akshay' }]
 ```
 
-The reason is that when `company` is assigned to `organization`, it creates a reference to the `company` object, not a copy of it. So, even after `company` is set to `null`, the object still exists in the `organization` array.
+The reason is that the array stores a reference to the object, not to the variable `company`. Setting `company = null` only rebinds the variable; the object is still referenced from the `organization` array, so it is unchanged (and not garbage-collected).
 
 
 ## Question 3
-Give very short answer
-console.log(a)
+Give a very short answer. What will be the output of the code below, and why?
 
-console.log(b)
-
+```javascript
+console.log(a);
+console.log(b);
 var a = 10;
-
 let b = 12;
-
-What will be the output of the above code also mention the reason why so
+```
 
 ### Answer:
 The output will be:
@@ -58,11 +63,11 @@ ReferenceError: Cannot access 'b' before initialization
 ```
 
 Explanation:
-- `console.log(a)`: `a` is declared with `var` which is hoisted to the top of its scope but not initialized, so it logs `undefined`.
+- `console.log(a)`: the `var a` declaration is hoisted to the top of its scope and initialized to `undefined` (the assignment `= 10` stays in place), so it logs `undefined`.
 - `console.log(b)`: `b` is declared with `let`, and it's in the temporal dead zone until its declaration is reached, causing a `ReferenceError`.
 
 ## Question 4
-You are required to show the preview of a website on your react application how will you achieve this also mention the limitation or security
+You are required to show a preview of a website in your React application. How will you achieve this? Also mention the limitations and security concerns.
 
 ### Answer
 To achieve a preview of a website in a React application, you can use an iframe element. Here's a basic example of how you could implement this:
@@ -93,31 +98,30 @@ In this component:
 - An iframe is used to embed the website within the React application.
 
 Limitations and security concerns:
-- Security: Loading content from arbitrary URLs into an iframe can pose security risks, such as XSS attacks if the content is not properly sanitized. Ensure that you trust the source of the URLs being previewed or implement proper security measures.
-- Cross-Origin Restrictions: Modern browsers enforce Cross-Origin Resource Sharing (CORS) policies, which may prevent loading content from certain domains into an iframe if they don't explicitly allow it.
+- Security: Embedded pages can run scripts, open pop-ups or navigate the top window. Add the `sandbox` attribute (only allow what you need, e.g. `sandbox="allow-scripts"`), only accept `http(s)` URLs (never `javascript:`), and preview only sources you trust.
+- Embedding restrictions: Many sites forbid being framed with the `X-Frame-Options: DENY/SAMEORIGIN` header or a `Content-Security-Policy: frame-ancestors` directive, so the iframe stays blank. The usual workaround is a server-side preview (fetch Open Graph metadata or render a screenshot on the backend).
+- Same-origin policy: You cannot read or style the content of a cross-origin iframe from your app.
 - Performance: Loading large or complex websites into iframes can impact performance, especially on mobile devices.
 - Responsive Design: Ensuring that the iframe content is responsive and displays properly across different screen sizes and devices can be challenging.
 
 
 ## Question 5
-```html
+```jsx
 <div id="parent" onClick={this.handleParent)>
-
-<div id="child" onClick=(this.handleChild)> hello </div>
-
+  <div id="child" onClick=(this.handleChild)> hello </div>
 </div>
 ```
 
 On clicking the div child which onclick method will be triggered and why?
 
 ### Answer
-In the provided HTML code, there's a syntax error in the onClick attribute of the parent div. It should be onClick={this.handleParent} instead of onClick={this.handleParent). Assuming that's corrected, here's how the event propagation works:
+The snippet has two syntax errors: the parent should use `onClick={this.handleParent}` (not `{this.handleParent)`) and the child `onClick={this.handleChild}` (not `(this.handleChild)`). Assuming those are corrected, here's how the event propagation works:
 
 1. If you click on the child div, the event will bubble up through the DOM hierarchy.
 2. First, the onClick event of the child div will be triggered.
 3. Then, the onClick event of the parent div will be triggered if it's properly defined.
 
-So, both onClick methods will be triggered, first the one for the child and then the one for the parent. This is because of event bubbling in the DOM.
+So, both onClick methods will be triggered, first the one for the child and then the one for the parent. This is because of event bubbling in the DOM. To stop the parent handler from running, call `event.stopPropagation()` in `handleChild`.
 
 ## Question 6
 Why does React not use javascript DOM directly and how does it achieve showing components on DOM? Also, can you manage to make changes to DOM using react, if yes how?
@@ -129,32 +133,44 @@ React doesn't use JavaScript DOM directly for a few reasons:
 
 2. **Virtual DOM**: React uses a virtual DOM, which is a lightweight copy of the actual DOM. It reconciles changes made to this virtual DOM with the real DOM, minimizing the number of actual DOM manipulations needed and improving performance.
 
-To show components on the DOM, React uses its rendering methods, such as `ReactDOM.render()` or component lifecycle methods like `render()`. These methods take JSX (JavaScript XML) or React elements and translate them into DOM elements, which are then inserted into the DOM.
+To show components on the DOM, React mounts a root (`ReactDOM.createRoot(container).render(<App />)` in React 18+, `ReactDOM.render()` in older versions) and calls your components (function components, or `render()` in class components). These methods take JSX (JavaScript XML) or React elements and translate them into DOM elements, which are then inserted into the DOM.
 
 Yes, you can manage changes to the DOM using React. While React encourages you to work with its virtual DOM and JSX syntax, you can still manipulate the DOM directly if needed. React provides a few ways to achieve this:
 
-1. **Refs**: React allows you to create references to DOM elements using the `ref` attribute. This lets you directly access and modify DOM elements within your React components.
+1. **Refs**: Create a ref with `useRef()` (or `createRef()` in class components) and attach it with the `ref` attribute. `ref.current` is the real DOM node, which you can read or modify, typically inside `useEffect`/`useLayoutEffect`.
 
-2. **ReactDOM**: You can use methods from `ReactDOM` such as `ReactDOM.findDOMNode()` to access the underlying DOM node of a React component and make changes to it.
+2. **Portals**: `ReactDOM.createPortal(children, domNode)` renders children into a DOM node outside the component's parent hierarchy (e.g. modals).
+
+(`ReactDOM.findDOMNode()` used to be another option, but it is deprecated and removed in React 19.)
 
 However, it's generally recommended to avoid direct DOM manipulation when working with React, as it can bypass React's reconciliation process and lead to unexpected behavior. Instead, try to manage state and UI changes through React's component state and props system.
 
 
-## Question 7:
-How will you write CSS to achieve the below UI.
+## Question 7
+How will you write CSS to achieve the UI below? The numbers are four boxes. Only describe how you would do the layout.
 
+```
         |         2
                  _
 1       |           3
                        _
-        |           4.
-
-Only provide information on how you will do the layouting.
-
-These all numbers are four boxes 
+        |           4
+```
 
 ### Answer
-To achieve the layout described:
+A simple approach: box 1 is a left column spanning the full height, and boxes 2, 3 and 4 are stacked in a right column, separated by a vertical divider (`|`) and horizontal dividers (`_`). With CSS Grid:
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+.box-1 { grid-row: 1 / 4; border-right: 1px solid #000; align-self: stretch; }
+.box-2, .box-3 { border-bottom: 1px solid #000; }
+```
+
+Alternative described with Flexbox and pseudo-elements:
 
 1. Use a parent container with `display: flex` to create a horizontal layout.
 2. Each box (numbered 1-4) will be a child element.
@@ -204,10 +220,12 @@ Here's a basic example of the CSS:
 Adjust the widths, heights, and spacing values according to your specific design requirements.
 
 ## Question 8
-What will be the output of the following-
+What will be the output of the following?
 
-setInterval(() => console.log('Inside func'), 1000); [51, 62, 53, 344].reduce((x, y) => console.log(x, y));
-
+```javascript
+setInterval(() => console.log('Inside func'), 1000);
+[51, 62, 53, 344].reduce((x, y) => console.log(x, y));
+```
 
 ### Answer
 The output of the given code will be:
@@ -216,45 +234,44 @@ The output of the given code will be:
 51 62
 undefined 53
 undefined 344
+Inside func      (after 1 s)
+Inside func      (after 2 s, and so on every second)
 ```
 
 Explanation:
-- The `setInterval` function will print 'Inside func' to the console every 1000 milliseconds.
+- `setInterval` only schedules its callback, so the synchronous `reduce` runs first. Afterwards 'Inside func' is printed every 1000 milliseconds until `clearInterval` is called.
 - The `reduce` function iterates over the array `[51, 62, 53, 344]` and applies the callback function `(x, y) => console.log(x, y)`.
 - The `console.log(x, y)` statement inside the `reduce` callback prints the accumulated value `x` and the current array element `y` at each iteration.
 - Since no initial value is provided for the accumulator in the `reduce` function, the first element of the array is used as the initial value for `x`.
 - The first element (`51`) is printed alongside the second element (`62`), then `undefined` (the return value of `console.log(x, y)`) is printed alongside the third element (`53`), and `undefined` is printed alongside the fourth element (`344`).
 
 
-## Question 9:
-What will be the output of the following code
+## Question 9
+What will be the output of the following code? Give a short reason.
 
-const func1 = () => console.log('Running 1st function******);
-
-const func2 = () => setTimeout(() => console.log('Running 2nd function*****"));
-
-const func3 = ()> console.log('Running 3rd function*****");
+```javascript
+const func1 = () => console.log('Running 1st function');
+const func2 = () => setTimeout(() => console.log('Running 2nd function'));
+const func3 = () => console.log('Running 3rd function');
 
 func2();
-
 func1();
-
 func3();
-
-Also in short give a reason.
+```
 
 ### Answer
 The output of the code will be:
 
 ```
-Running 1st function******
-Running 3rd function*****
+Running 1st function
+Running 3rd function
+Running 2nd function
 ```
 
 The reason for this output is that `func2()` uses `setTimeout` which schedules the execution of its callback function asynchronously after a specified delay (in this case, 0 milliseconds). So, `func2()` is executed first, but its console log statement is delayed. Then, `func1()` and `func3()` are executed synchronously, resulting in their console log statements being printed first. Finally, after a short delay, the callback function of `func2()` is executed, printing its console log statement.
 
 ## Question 10
-How do you achieve passing data between components in react application? if you are given hundred components how would you choose to pass the data between them
+How do you pass data between components in a React application? If you had a hundred components, how would you choose to pass data between them?
 
 ### Answer
 To pass data between components in a React application, you can use props for parent-child communication and context or Redux for communication between deeply nested or unrelated components.
@@ -262,18 +279,18 @@ To pass data between components in a React application, you can use props for pa
 If given a hundred components, I would consider using context or Redux for passing data between them, as these approaches offer a centralized and scalable solution, making data management more organized and efficient across a large number of components.
 
 ## Question 11
-You are given an API to face data .which react hook would you use to do so ?also this API is to be called again to get data from the application .from which mechanism would you choose to optimise this
+You are given an API to fetch data. Which React hook would you use to do so? The API will be called again from other parts of the application; which mechanism would you choose to optimise this?
 
 ### Answer
 
 To fetch data from an API in a React application, I would use the `useEffect` hook along with the `useState` hook to manage the state of the fetched data. Specifically, I would use `useEffect` with an empty dependency array to make the API call once when the component mounts.
 
-To optimize subsequent calls to the API, I would implement some form of caching mechanism, such as memoization or caching the data in Redux or context. This way, if the data has already been fetched once, subsequent calls can retrieve the data from the cache instead of making another API call, reducing unnecessary network requests and improving performance.
+To optimize subsequent calls to the API, I would implement some form of caching mechanism, such as a data-fetching library with a built-in cache (TanStack Query / React Query, SWR, RTK Query), memoization, or caching the data in Redux or context. This way, if the data has already been fetched once, subsequent calls can retrieve the data from the cache instead of making another API call, reducing unnecessary network requests and improving performance.
 
 ## Question 12
-You are given to scenario suggest the method you will choose to optimise in such case 
+You are given two scenarios. Suggest the method you would choose to optimise each one.
 
-1. given us response of an array of objects almost thousand of this you are required to modify each of checked by calculating and include a new key and reset the state
+1. An API response is an array of almost a thousand objects. You must compute a new key for each object and set the state with the result.
 
 2. A  react component that takes a lot of time to load
 
@@ -288,13 +305,27 @@ For a React component that takes a lot of time to load, I would choose to optimi
 You are given a set of API's. You have to return the response of the API that executes the fastest, Suggest how will you achieve this and also give a reason.
 
 ### Answer
-In a frontend context, you can achieve this by utilizing JavaScript's asynchronous capabilities. You can make asynchronous requests to all APIs simultaneously using either `XMLHttpRequest` or the newer `fetch` API. Then, you can track the time taken for each request to complete using `Promise.race()` to determine the fastest response.
+Fire all requests at the same time with `fetch` and let the promise combinators pick the winner:
 
-Here's a high-level approach:
+- `Promise.race()` settles with the first promise that settles, whether it succeeds or fails.
+- `Promise.any()` resolves with the first promise that succeeds and ignores failures (it rejects only if all of them fail). This is usually what you want.
 
-1. Send asynchronous requests to all APIs simultaneously.
-2. Use `Promise.race()` to track which request resolves first.
-3. Once the fastest response is received, handle it accordingly (e.g., display the response to the user or further process it).
+```javascript
+async function fastest(urls) {
+  const controller = new AbortController();
+  const requests = urls.map((url) =>
+    fetch(url, { signal: controller.signal }).then((res) => {
+      if (!res.ok) throw new Error(`${url}: ${res.status}`);
+      return res.json();
+    })
+  );
+  try {
+    return await Promise.any(requests);
+  } finally {
+    controller.abort(); // cancel the slower requests
+  }
+}
+```
 
 This approach ensures that your frontend application remains responsive while fetching data from multiple APIs, and it optimizes the user experience by displaying the fastest response as soon as it's available.
 
@@ -334,7 +365,7 @@ Here's how you can achieve this:
 Both sessionStorage and in-memory storage provide a way to store and retrieve data within the browser tab's session without persisting it beyond the tab's lifetime. Choose the appropriate method based on your specific requirements and the scope of data you need to manage within your front-end application.
 
 ## Question 15
-what is color of div in following code 
+What is the text colour of the div in the following code?
 
 ```html
 <!DOCTYPE html>
@@ -353,12 +384,10 @@ what is color of div in following code
 ```
 
 ### Answer
-Sure, let's add a class-based CSS rule to the example:
+The text is **red**.
 
+The `<div>` has both an inline style (`color: red;`) and a class-based style (`.box { color: blue; }`). Inline styles have higher specificity than any selector in a stylesheet, so the inline rule wins. Only a stylesheet rule marked `!important` would override it.
 
-Now, the `<div>` element has both an inline style (`color: red;`) and a class-based style (`.box { color: blue; }`). 
-
-The inline style will override the class-based style because inline styles have higher specificity. So, the text color of the `<div>` element will be red.
 ---
 
 Feel free to use these questions for your interview preparation or customize them as needed!
